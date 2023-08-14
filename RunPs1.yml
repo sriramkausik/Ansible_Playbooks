@@ -6,3 +6,4 @@
   tasks:
   - name: Run a powershell script to clean-up cdrive space
     win_shell: C:\cclean.ps1
+#ignore
