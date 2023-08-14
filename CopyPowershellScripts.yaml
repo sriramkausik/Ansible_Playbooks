@@ -1,0 +1,13 @@
+#Copy a powershell file to all windows servers.
+---
+- hosts: win
+  gather_facts: no
+  vars:
+   source: "cclean.ps1"
+   destination: "C:\\cclean.ps1"
+  tasks:
+   - name: Copy Powershell file to multiple windows hosts
+     win_copy:
+       src: "{{ source }}"
+       dest: "{{ destination }}"
+       # remote_src: true

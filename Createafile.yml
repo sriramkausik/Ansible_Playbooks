@@ -1,0 +1,9 @@
+#Create a file :
+---
+- hosts: win
+  gather_facts: no
+  tasks:
+   - name: Touch a file (creates if not present, updates modification time if present)
+     win_file:
+      path: C:\hello.txt
+      state: touch

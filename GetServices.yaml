@@ -1,0 +1,7 @@
+---
+- hosts: win
+  gather_facts: no
+  tasks:
+    - name: Get info for all installed services
+      ansible.windows.win_service_info:
+      register: service_info
