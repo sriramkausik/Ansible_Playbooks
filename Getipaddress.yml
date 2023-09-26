@@ -1,0 +1,7 @@
+---
+- hosts: win
+  gather_facts: yes
+  tasks:
+   - name: Printing the gathered facts
+     ansible.builtin.debug:
+      msg: "{{ hostvars[inventory_hostname]['ansible_facts']['ip_addresses'] }}

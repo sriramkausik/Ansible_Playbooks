@@ -1,0 +1,25 @@
+---
+- hosts: win
+  gather_facts: no
+  tasks:
+   - name: Creating a dir temp
+     win_file:
+      path: C:\temp\cleanup
+      state: directory
+
+   - name: Creating a dir inside temp
+     win_file:
+      path: C:\temp\cleanup1
+      state: directory
+
+   - name: Creating a file inside cleanup1
+     win_file:
+      path: C:\temp\cleanup1\hi.txt
+      state: touch   
+      
+   - name: Creating a file inside cleanup
+     win_file:
+      path: C:\temp\cleanup\hello.txt
+      state: touch
+
+    

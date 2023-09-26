@@ -10,4 +10,6 @@
      win_copy:
        src: "{{ source }}"
        dest: "{{ destination }}"
-       # remote_src: true
+     register: vars
+   - name: Verbose the output
+      Debug: msg= "Debug info is {{ var }}"
