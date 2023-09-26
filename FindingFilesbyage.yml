@@ -1,0 +1,9 @@
+- hosts: win
+  gather_facts: no
+  tasks:
+  - name: finding the file greater than one day.
+    win_find:
+     paths: C:\temp\cleanup
+    register: var
+  - name: Returning the output
+    debug: msg="The output is {{ var.files[0].path }}"
