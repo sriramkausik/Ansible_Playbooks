@@ -1,0 +1,46 @@
+---
+  - hosts: win
+    gather_facts: no
+    tasks:
+      # block:
+    - name: Get the registry information
+      win_reg_stat:
+          path: HKLM:\SOFTWARE\ServerInfo
+          name: ServerOwner
+      register: VarServerInfo
+
+      # rescue:
+    - name: Debug information
+      debug: 
+          msg: The info is {{ VarServerInfo.value }}
+
+
+
+
+    - name: Create a text file
+      win_file:
+        path: C:\windows\output.txt
+        state: touch
+
+    - name: Write a line in text file.
+      win_copy:
+        content: The server owner is "{{ VarServerInfo.value }}\\n"
+        dest: C:\windows\output.txt
+        #line: "{{ VarServerInfo[value] }}"
+
+    - name: Get the registry information
+      win_reg_stat:
+          path: HKLM:\SOFTWARE\ServerInfo
+          name: OwnerEmail
+      register: VarServerInfoemail
+
+    - name: Debug information2
+      debug: 
+          msg: The info is {{ VarServerInfoemail.value }}
+
+
+    - name: Write another line in text file.
+      win_copy:
+        content: The server owner is "{{ VarServerInfoemail.value }}\\n"
+        dest: C:\windows\output.txt
+        #line: "{{ VarServerInfo[value] }}"

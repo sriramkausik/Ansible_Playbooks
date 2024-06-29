@@ -1,0 +1,23 @@
+---
+ - hosts: win
+   gather_facts: no
+   tasks:
+    - name: Handle Errors
+      block:
+      - name: Check if a folder is present
+        win_find:
+          paths: c:\temp
+        register: output
+
+      - name: create a file when c:\temp is present
+        win_file:
+          path: C:\success
+          state: touch
+        when: output is succeeded
+
+      rescue:
+      - name: create a file called failure on error
+        win_file:
+            path: C:\failure
+            state: touch  
+

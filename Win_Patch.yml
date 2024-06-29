@@ -1,0 +1,16 @@
+#Install a patch through DISM
+
+---
+- hosts: win
+  gather_facts: no
+  tasks:
+  - name: check if the current month update is present or not 
+    win_updates:
+      Categoryname: SecurityUpdates
+      state: searched
+      log_path: C:\ansible_wu.txt
+    register : variable
+  - name: output the variable file
+    win_get_content:
+      
+

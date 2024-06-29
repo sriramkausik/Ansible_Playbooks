@@ -1,0 +1,23 @@
+
+---
+- hosts: web
+  become: yes
+  tasks:
+   - name: Install httpd
+     yum:
+      name: httpd
+      state: present
+   - name: Start and enable httpd service
+     service:
+      name: httpd
+      state: started
+      enabled: yes
+   - name: Copy the source from GIT
+     get_url:
+      url: http://repo.example.com/website.tgz
+      dest: /tmp/website.tgz
+   - name: unarchive the contents to a specific dir
+     unarchive:
+      src: /tmp/website.tgz
+      dest: /var/www/html
+      remote_src: yes
