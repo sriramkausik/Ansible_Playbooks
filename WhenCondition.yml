@@ -1,0 +1,17 @@
+---
+ - hosts: win
+   gather_facts: no
+   tasks:
+    - name: check if the directory exists
+      win_find:
+        paths: C:\temp
+        ignore_errors: true
+      register: output
+      
+    - name : Executing on when condition is successful
+      win_file:
+        path: C:\success.txt
+        state: touch
+      when: output is succeeded
+
+
